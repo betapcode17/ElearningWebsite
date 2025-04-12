@@ -1,0 +1,257 @@
+/* Reset mặc định */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Overpass", sans-serif;
+}
+
+/* Định dạng body */
+body {
+  background-color: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Container chính */
+.login-container {
+  display: flex;
+  width: 900px;
+  height: 700px; /* Tăng chiều cao container lên 700px để làm giao diện dài hơn */
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Phần form đăng nhập/đăng ký */
+.login-form {
+  width: 50%;
+  padding: 60px; /* Tăng padding để lấp đầy chiều cao */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px; /* Tăng khoảng cách dưới logo */
+  font-size: 30px; /* Tăng kích thước font logo */
+  font-weight: 800;
+  color: #333;
+}
+
+.logo i {
+  color: #6c63ff;
+}
+
+/* Tiêu đề */
+h1 {
+  font-family: "Overpass", sans-serif;
+  font-size: 44px; /* Tăng kích thước tiêu đề */
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #333;
+  margin-bottom: 12px; /* Tăng khoảng cách dưới tiêu đề */
+}
+
+p {
+  font-size: 18px; /* Tăng kích thước font */
+  color: #666;
+  margin-bottom: 50px; /* Tăng khoảng cách dưới đoạn chữ */
+}
+
+p a {
+  color: #6c63ff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+p a:hover {
+  color: #5a52cc;
+  text-decoration: underline;
+}
+
+/* Nhóm input */
+.input-group {
+  margin-bottom: 30px; /* Tăng khoảng cách giữa các nhóm input */
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 12px; /* Tăng khoảng cách giữa nhãn và input */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 16px 20px; /* Tăng padding để ô input cao hơn */
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.input-group input::placeholder {
+  color: #bbb;
+  font-style: italic;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #6c63ff;
+  background-color: #fff;
+  box-shadow: 0 0 12px rgba(108, 99, 255, 0.3);
+}
+
+/* Bố cục 3 hàng, mỗi hàng 2 cột */
+.form-row {
+  display: flex;
+  gap: 25px; /* Tăng khoảng cách giữa 2 cột */
+  margin-bottom: 30px; /* Tăng khoảng cách giữa các hàng */
+}
+
+.form-row .input-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+/* Tùy chọn Gender */
+.gender-options {
+  display: flex;
+  gap: 25px; /* Tăng khoảng cách giữa các lựa chọn */
+}
+
+.gender-label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #555;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.gender-label input {
+  display: none;
+}
+
+.gender-label::before {
+  content: "";
+  display: inline-block;
+  width: 22px; /* Tăng kích thước radio button */
+  height: 22px;
+  border: 2px solid #e0e0e0;
+  border-radius: 50%;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+.gender-label input:checked + ::before {
+  border-color: #6c63ff;
+  background-color: #6c63ff;
+  box-shadow: inset 0 0 0 4px #fff;
+}
+
+.gender-label:hover {
+  color: #6c63ff;
+}
+
+.gender-label:hover::before {
+  border-color: #6c63ff;
+}
+
+/* Nút Sign In/Register */
+.sign-in-btn {
+  width: 100%;
+  padding: 18px; /* Tăng padding để nút cao hơn */
+  background: linear-gradient(90deg, #6c63ff, #a29bfe);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 20px; /* Tăng kích thước font */
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.sign-in-btn:hover {
+  background: linear-gradient(90deg, #5a52cc, #8b82e3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(108, 99, 255, 0.4);
+}
+
+/* Phần hình minh họa */
+.illustration {
+  width: 50%;
+  height: 100%; /* Đảm bảo hình minh họa kéo dài theo chiều cao container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f7fa;
+}
+
+.illustration img {
+  max-width: 100%;
+  height: auto;
+  max-height: 100%; /* Đảm bảo hình không vượt quá chiều cao container */
+  object-fit: contain; /* Giữ tỷ lệ hình ảnh */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    width: 90%;
+    height: auto; /* Chiều cao tự động trên thiết bị di động */
+    margin: 20px;
+  }
+
+  .login-form,
+  .illustration {
+    width: 100%;
+  }
+
+  .illustration {
+    display: none; /* Ẩn hình minh họa trên thiết bị nhỏ */
+  }
+
+  .login-form {
+    padding: 40px; /* Giảm padding trên thiết bị di động */
+  }
+
+  h1 {
+    font-size: 36px; /* Giảm kích thước tiêu đề */
+    letter-spacing: 3px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .gender-options {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .sign-in-btn {
+    padding: 15px; /* Giảm padding trên thiết bị di động */
+    font-size: 18px; /* Giảm kích thước font */
+  }
+}

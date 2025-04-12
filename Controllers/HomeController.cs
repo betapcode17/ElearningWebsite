@@ -1,21 +1,28 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using ElearningWebsite.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ElearningWebsite.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly LearningManagementSystemContext _db;
+        public HomeController(ILogger<HomeController> logger, LearningManagementSystemContext db)
         {
             _logger = logger;
+            _db = db; // Khởi tạo _db
         }
 
         public IActionResult Index()
         {
-            return View();
+            var latestCourses = _db.Courses
+                         .OrderByDescending(c => c.CourseId)
+                         .Take(6)
+                         .ToList();
+            return View(latestCourses);
+          
         }
 
         public IActionResult Privacy()

@@ -1,0 +1,111 @@
+﻿
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@model IPagedList<Enrollment>
+@{
+    ViewData["Title"] = "Index";
+}
+<section class="courses">
+    <h1 class="heading">Your courses</h1>
+
+    <div class="box-container">
+
+        @foreach (var course in Model)
+        {
+            <div class="box">
+                <div class="tutor">
+                    <img src="~/UserLayout/images/pic-2.jpg" alt="" />
+                    <div class="info">
+                        <h3>@course.Instructor</h3>
+                    </div>
+                </div>
+                <div class="thumb">
+                    <img src="~/@course.ImgPath" alt="" />
+                    <span>@course.VideoCount</span>
+                </div>
+                <h3 class="title">@course.CourseName</h3>
+                <ul class="course-info">
+                    <li>
+                        <p>Start Date</p>
+                        <p class="value-box">@course.StartDate</p>
+                    </li>
+                    <li>
+                        <p>Tuition Fee</p>
+                        <p class="value-box">@course.TuitionFee</p>
+                    </li>
+                    <li>
+                        <p>Enrolled</p>
+                        <p class="value-box">
+                            <span class="enrolled">@course.CurrentStudents</span> / <span class="max">@course.MaxStudents</span>
+                        </p>
+                    </li>
+                </ul>
+
+                <a asp-action="Details" asp-controller="Courses" asp-route-id="@course.CourseId" class="inline-btn"> View course</a>
+            </div>
+        }
+    </div>
+    <div class="pagination">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new
+            {
+                page,
+                search_box = ViewBag.CurrentFilter // Truyền lại giá trị tìm kiếm
+            }))
+    </div>
+</section>
+<style>
+    /* CSS phân trang */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin: 30px 0;
+        list-style: none;
+        padding: 0;
+    }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a,
+        .pagination span {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .pagination a {
+            color: #555;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
+
+            .pagination a:hover {
+                background-color: #e9ecef;
+                border-color: #dee2e6;
+            }
+
+        .pagination .active a,
+        .pagination .active span {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .pagination .disabled span {
+            color: #6c757d;
+            background-color: #f8f9fa;
+            border-color: #dee2e6;
+            cursor: not-allowed;
+        }
+
+        /* Hiệu ứng khi hover */
+        .pagination a:not(.active):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+</style>
+

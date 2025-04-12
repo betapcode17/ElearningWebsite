@@ -1,0 +1,73 @@
+﻿@model ElearningWebsite.Models.Course
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_LayoutUser";
+}
+
+<section class="playlist-details">
+    <h1 class="heading">Courses details</h1>
+
+    <div class="row">
+        <div class="column">
+            <form action="" method="post" class="save-playlist">
+                <button type="submit">
+                    <i class="far fa-bookmark"></i> <span>save playlist</span>
+                </button>
+            </form>
+            <div class="thumb">
+                <img src="~/@Model.ImgPath" alt="" />
+                <span>@Model.VideoCount videos</span>
+            </div>
+        </div>
+        <div class="column">
+            <div class="tutor">
+                <img src="images/pic-2.jpg" alt="" />
+                <div>
+                    <h3>@Model.Instructor</h3>
+                </div>
+            </div>
+
+            <div class="thumb">
+                <h1 class="title">@Model.CourseName</h1>
+                <ul class="course-info">
+                    <li>
+                        <p>Start Date</p>
+                        <p class="value-box">@Model.StartDate</p>
+                    </li>
+                    <li>
+                        <p>Tuition Fee</p>
+                        <p class="value-box">@Model.TuitionFee</p>
+                    </li>
+                    <li>
+                        <p>Enrolled</p>
+                        <p class="value-box">
+                           @Model.CurrentStudents/@Model.MaxStudents
+                        </p>
+                    </li>
+                </ul>
+                <p>
+                    @Model.Description
+                </p>
+                <a asp-action="Details" name="@Model.CourseId" asp-controller="Courses" class="inline-btn">Register now</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="playlist-videos">
+    <h1 class="heading">playlist videos</h1>
+
+    <div class="box-container">
+
+        @for (int i = 1; i <= Model.VideoCount; i++)
+        {
+            <a class="box" href="watch-video.html">
+                <i class="fas fa-play"></i>
+                <img src="~/images/CourseVideoImg/post-1-@i" alt="" />
+                <h3>@Model.CourseName (part @i)</h3>
+            </a>
+        }
+
+    </div>
+</section>
+

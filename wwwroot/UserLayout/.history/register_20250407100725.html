@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Page - SmartLearn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/Login.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <!-- Phần bên trái: Form đăng ký -->
+      <div class="login-form">
+        <!-- Logo -->
+        <div class="logo">
+          <i class="fa-solid fa-book-open" style="margin-right: 10px"></i>
+          SmartLearn
+        </div>
+
+        <!-- Tiêu đề -->
+        <h1>REGISTER NOW!</h1>
+        <p>Already have an account, <a href="login.html">Sign in</a></p>
+
+        <!-- Form đăng ký -->
+        <form>
+          <!-- Trường Full Name và Username -->
+          <div class="form-row">
+            <div class="input-group">
+              <label for="full-name">Full Name</label>
+              <input
+                type="text"
+                id="full-name"
+                placeholder="Enter your name"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                placeholder="Enter your username"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Trường Email và Phone Number -->
+          <div class="form-row">
+            <div class="input-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                placeholder="Enter your number"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Trường Password và Confirm Password -->
+          <div class="form-row">
+            <div class="input-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="confirm-password">Confirm Password</label>
+              <input
+                type="password"
+                id="confirm-password"
+                placeholder="Confirm your password"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Trường Gender -->
+          <div class="input-group">
+            <label>Gender</label>
+            <div class="gender-options">
+              <label class="gender-label">
+                <input type="radio" name="gender" value="0" required /> Male
+              </label>
+              <label class="gender-label">
+                <input type="radio" name="gender" value="1" /> Female
+              </label>
+              <label class="gender-label">
+                <input type="radio" name="gender" value="2" /> Prefer not to say
+              </label>
+            </div>
+          </div>
+
+          <!-- Nút Register -->
+          <button type="submit" class="sign-in-btn">Register</button>
+        </form>
+      </div>
+
+      <!-- Phần bên phải: Hình minh họa -->
+      <div class="illustration">
+        <!-- Sử dụng cùng hình minh họa như trang đăng nhập -->
+        <img src="./images/Exlorer_Illustration 1.png" alt="Illustration" />
+      </div>
+    </div>
+  </body>
+</html>

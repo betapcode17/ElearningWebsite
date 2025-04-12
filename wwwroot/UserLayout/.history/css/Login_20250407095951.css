@@ -1,0 +1,167 @@
+/* Reset mặc định */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Overpass", sans-serif;
+}
+
+/* Định dạng body */
+body {
+  background-color: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Container chính */
+.login-container {
+  display: flex;
+  width: 900px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Phần form đăng nhập */
+.login-form {
+  width: 50%;
+  padding: 40px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.logo img {
+  width: 30px;
+  margin-right: 10px;
+}
+
+.logo span {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Tiêu đề */
+h1 {
+  margin-bottom: 10px;
+  font-family: Overpass;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: 3.6px;
+}
+
+p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+p a {
+  color: #6c63ff;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+/* Nhóm input */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  font-size: 14px;
+  color: #333;
+  padding: 24px 32px;
+  gap: 10px;
+  border-radius: 80px;
+  border: 2px solid rgb(220, 94, 27);
+  background: var(--white, #fff);
+}
+
+.input-group input::placeholder {
+  color: #aaa;
+}
+
+/* Tùy chọn Remember me và Forget password */
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.remember-me input {
+  margin-right: 5px;
+}
+
+.forget-password {
+  font-size: 14px;
+  color: #6c63ff;
+  text-decoration: none;
+}
+
+.forget-password:hover {
+  text-decoration: underline;
+}
+
+/* Nút Sign In */
+.sign-in-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #6c63ff;
+  border: none;
+  border-radius: 25px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sign-in-btn:hover {
+  background-color: #5a52cc;
+}
+
+/* Phần hình minh họa */
+.illustration {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f7fa;
+}
+
+.illustration img {
+  max-width: 100%;
+  height: auto;
+}

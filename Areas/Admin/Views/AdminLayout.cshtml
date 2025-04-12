@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewData["Title"] = "AdminLayout";
+}
+@using System.Security.Claims
+@{
+    var fullName = User.FindFirstValue("FullName");
+    var email = User.FindFirstValue("Email");
+    var imagePath = User.FindFirstValue("ImagePath");
+    var role = User.FindFirstValue(ClaimTypes.Role);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+
+    <!-- custom css file link  -->
+
+    <title>@ViewData["Title"] - ElearningWebsite</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ElearningWebsite.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/UserLayout/css/style.css" />
+</head>
+<body>
+    <header class="header">
+        <section class="flex">
+            <a href="home.html" class="logo">
+                <i class="fa-solid fa-book-open" style="margin-right: 10px"></i>
+                SmartLearn
+            </a>
+
+            <form action="search.html" method="post" class="search-form">
+                <input type="text"
+                       name="search_box"
+                       required
+                       placeholder="search courses..."
+                       maxlength="100" />
+                <button type="submit" class="fas fa-search"></button>
+            </form>
+
+            <div class="icons">
+                <div id="menu-btn" class="fas fa-bars"></div>
+                <div id="search-btn" class="fas fa-search"></div>
+                <div id="user-btn" class="fas fa-user"></div>
+                <div id="toggle-btn" class="fas fa-sun"></div>
+            </div>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="profile">
+                    @if (imagePath != null)
+                    {
+                        <img src="~/@imagePath" class="image" alt="" />
+                    }
+                    else
+                    {
+                        <img src="~/UserLayout/images/pic-1.jpg" class="image" alt="" />
+                    }
+                    <h3 class="name">@fullName</h3>
+
+                    @if (role == "0") // Hoặc userType == "Student"
+                    {
+                        <p class="role">Student</p>
+                    }
+                    @if (role == "1")
+                    {
+                        <p class="role">Admin</p>
+                    }
+
+                    <div class="flex-btn">
+                        <a href="profile.html" class="option-btn">view profile</a>
+                        <a asp-action="Logout" asp-controller="Accounts" class="option-btn">Logout</a>
+                    </div>
+
+
+                </div>
+            }
+        </section>
+    </header>
+    <div class="side-bar">
+        <div id="close-btn">
+            <i class="fas fa-times"></i>
+        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="profile">
+                @if (imagePath != null)
+                {
+                    <img src="~/@imagePath" class="image" alt="" />
+                }
+                else
+                {
+                    <img src="~/UserLayout/images/pic-1.jpg" class="image" alt="" />
+                }
+                <h3 class="name">@fullName</h3>
+                <p class="email">@email</p>
+                @if (role == "0") // Hoặc userType == "Student"
+                {
+                    <p class="role">Student</p>
+                }
+                @if (role == "1")
+                {
+                    <p class="role">Admin</p>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="profile">
+                <h1>Please Login or Register</h1>
+                <div class="flex-btn">
+                    <a asp-action="Login" asp-controller="Accounts" class="option-btn">login</a>
+                    <a asp-action="Register" asp-controller="Accounts" class="option-btn">register</a>
+                </div>
+            </div>
+        }
+
+
+        <nav class="navbar">
+            <a href="home.html"><i class="fas fa-home"></i><span>home</span></a>
+            <a href="about.html"><i class="fas fa-question"></i><span>about</span></a>
+            <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+            <a href="teachers.html"><i class="fas fa-chalkboard-user"></i><span>teachers</span></a>
+            <a href="contact.html"><i class="fas fa-headset"></i><span>contact us</span></a>
+        </nav>
+    </div>
+    @RenderBody()
+    <!-- custom js file link  -->
+    <script src="~/UserLayout/js/script.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

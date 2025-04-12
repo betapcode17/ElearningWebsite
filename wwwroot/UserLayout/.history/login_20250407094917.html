@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page - Brisheam</title>
+    <link rel="stylesheet" href="Login.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <!-- Phần bên trái: Form đăng nhập -->
+      <div class="login-form">
+        <!-- Logo -->
+        <div class="logo">
+          <img src="logo.png" alt="Brisheam Logo" />
+          <!-- Thay bằng đường dẫn logo thực tế -->
+          <span>BRISHEAM</span>
+        </div>
+
+        <!-- Tiêu đề -->
+        <h1>WELCOME BACK!</h1>
+        <p>Don't have an account, <a href="#">Sign up</a></p>
+
+        <!-- Form đăng nhập -->
+        <form>
+          <!-- Trường Username -->
+          <div class="input-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              placeholder="deniel123@gmail.com"
+            />
+          </div>
+
+          <!-- Trường Password -->
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="••••••••" />
+          </div>
+
+          <!-- Tùy chọn Remember me và Forget password -->
+          <div class="options">
+            <label class="remember-me">
+              <input type="checkbox" id="remember-me" />
+              Remember me
+            </label>
+            <a href="#" class="forget-password">Forget password?</a>
+          </div>
+
+          <!-- Nút Sign In -->
+          <button type="submit" class="sign-in-btn">Sign In</button>
+        </form>
+      </div>
+
+      <!-- Phần bên phải: Hình minh họa -->
+      <div class="illustration">
+        <!-- Thay bằng hình minh họa thực tế -->
+        <img src="illustration.png" alt="Illustration" />
+      </div>
+    </div>
+  </body>
+</html>
