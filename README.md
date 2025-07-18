@@ -66,6 +66,7 @@ Students can interact with the system through a streamlined interface designed t
 
 #### 1.1: Landing Page
 Visitors are welcomed with a homepage showcasing featured courses and an overview of the platform.
+<img width="1859" height="908" alt="image" src="https://github.com/user-attachments/assets/dced77a7-f824-427f-a8fb-12f44cade985" />
 
 #### 1.2: Course List
 Non-logged-in users can browse available courses including names, instructors, categories, and start dates.
