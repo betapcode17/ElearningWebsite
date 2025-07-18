@@ -1,53 +1,61 @@
-🎓 Training Center Management System
-📌 Introduction
-This is a Training Center Management System built using ASP.NET MVC, allowing administrators to manage courses, students, and course enrollment processes. The application supports both Students and Admins, and is suitable for training centers, small educational institutions, or internal learning systems.
+# 🎓 Training Center Management Platform
 
-🚀 Main Features
-1. Course Management
-Course Information: Course ID, Course Name, Instructor, Start Date, Tuition Fee, Maximum Number of Students.
+## 🌟 Introduction
 
-Functions:
+Educational centers often struggle with managing course offerings, monitoring student enrollments, and tracking academic progress. Similarly, students may face difficulties finding suitable courses or managing their registrations effectively.
 
-Add / Edit / Delete courses.
+This project addresses those challenges by developing a centralized web platform that enables **efficient management of training courses**, **student registration**, and **real-time course tracking**. It provides tools for both **administrators** and **students** to streamline educational management and improve the overall learning experience.
 
-Display list of available courses.
+In addition to solving practical problems, this project is also a hands-on opportunity for our development team to apply key software engineering principles, such as MVC architecture, Entity Framework usage, and database-driven application development.
 
-2. Student Management
-Student Information: Student ID, Full Name, Date of Birth, Phone Number, Email, Username, Password.
+---
 
-Functions:
+## ✨ Core Features
 
-Students can register an account and log in to the system.
+Our platform supports **two main user roles** — **Students** and **Administrators** — each with tailored functionalities:
 
-3. Course Enrollment
-Students can choose and enroll in available courses.
+---
 
-The system checks whether the course has reached the maximum number of students before allowing registration.
+### 👨‍🏫 For Administrators
 
-Students can cancel enrollment before the course start date.
+Administrators have full access to manage the entire system, including course offerings and student accounts.
 
-🛠 Technical Requirements
-Use ASP.NET MVC to develop the application.
+- **Course Management**  
+  Create, update, delete, and view details of training courses.  
+  Includes fields such as:  
+  - Course ID, Name, Instructor  
+  - Start Date, Tuition Fee, Maximum Capacity  
 
-Use Entity Framework for database operations.
+- **Student Management**  
+  Manage student records including:  
+  - Student ID, Full Name, Date of Birth, Email, Phone Number, Username, Password  
 
-Design UI using Bootstrap or plain CSS.
+- **Enrollment Monitoring**  
+  View and manage student enrollment per course.  
+  Enforce constraints like max student capacity and enrollment deadlines.
 
-✅ Basic Requirements
-Set up and configure a standard ASP.NET MVC project.
+---
 
-Create appropriate Models for database interaction.
+### 🎓 For Students
 
-Implement CRUD operations (Create, Read, Update, Delete) for courses and students.
+Students can interact with the system through a streamlined interface designed to help them discover and register for courses.
 
-Develop course enrollment features with constraints.
+- **Account Registration & Login**  
+  Easily sign up and securely log in to the platform.
 
-Check course capacity before confirming student registration.
+- **Course Browsing & Registration**  
+  View available courses and register based on personal preferences.  
+  The system will check for course availability before confirming registration.
 
-👥 User Roles
-The system has 2 main roles:
+- **Enrollment Cancellation**  
+  Cancel registration if needed (prior to course start date).
 
-Student
+---
+## 🛠 Technology Stack
 
-Admin (full access to manage data, track courses, generate reports, etc.)
+- **Backend:** ASP.NET MVC (C#)
+- **Frontend:** HTML, CSS, Bootstrap
+- **Database:** SQL Server
+- **ORM:** Entity Framework Core
+- **Architecture:** Model-View-Controller (MVC)
 
