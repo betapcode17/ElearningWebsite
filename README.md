@@ -66,19 +66,26 @@ Students can interact with the system through a streamlined interface designed t
 
 #### 1.1: Landing Page
 Visitors are welcomed with a homepage showcasing featured courses and an overview of the platform.
+
 <img width="1859" height="908" alt="image" src="https://github.com/user-attachments/assets/dced77a7-f824-427f-a8fb-12f44cade985" />
 
 #### 1.2: Course List
 Non-logged-in users can browse available courses including names, instructors, categories, and start dates.
 
+<img width="1870" height="863" alt="image" src="https://github.com/user-attachments/assets/6f213475-bc44-4810-b1b7-7365c42520bd" />
+
 #### 1.3: Course Details
 Each course includes detailed information like description, tuition, available slots, and schedule.
 
-#### 1.4: Instructor Introduction
-Guests can view profiles of instructors before deciding to register.
+<img width="1514" height="813" alt="image" src="https://github.com/user-attachments/assets/900f98d4-28ac-4fd6-b9a9-844587b2bb19" />
 
-#### 1.5: Login & Registration Page
-Users can register either as a student or instructor. The login page includes validation and role-based redirects.
+#### 1.4: Login Page
+
+<img width="874" height="622" alt="image" src="https://github.com/user-attachments/assets/e09a527b-cada-4bd6-9ef8-180ad56a774f" />
+
+#### 1.5: Registration Page
+
+<img width="913" height="797" alt="image" src="https://github.com/user-attachments/assets/7931b34e-daad-4f75-8f5f-b5fc1518b707" />
 
 ---
 
