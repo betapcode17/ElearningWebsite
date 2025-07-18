@@ -25,9 +25,9 @@ public partial class LearningManagementSystemContext : DbContext
 
     public virtual DbSet<Student> Students { get; set; }
 
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Data Source=MSI\\SQLEXPRESS;Initial Catalog=LearningManagementSystem;Integrated Security=True;Trust Server Certificate=True");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=MSI\\SQLEXPRESS;Database=LearningManagementSystem;Integrated Security=True;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -102,7 +102,6 @@ public partial class LearningManagementSystemContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("CourseID");
             entity.Property(e => e.EnrollmentDate).HasDefaultValueSql("(getdate())");
-            entity.Property(e => e.Status).HasMaxLength(20);
             entity.Property(e => e.StudentId)
                 .HasMaxLength(50)
                 .HasColumnName("StudentID");

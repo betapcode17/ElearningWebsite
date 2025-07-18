@@ -1,0 +1,215 @@
+.enroll-container {
+  background-color: #f5f3f7;
+  padding: 2rem;
+}
+
+.enroll-header {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+}
+
+.enroll-title {
+  text-align: center;
+  color: #ff6600;
+  font-size: 2.5rem;
+  font-weight: bold;
+  position: relative;
+}
+
+.enroll-title::after {
+  content: "";
+  width: 60px;
+  height: 4px;
+  background-color: #ff6600;
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 6px;
+}
+
+.enroll-body {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.enroll-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+.enroll-table thead {
+  background-color: #212529;
+  color: white;
+  text-align: center;
+}
+
+.enroll-table td,
+.enroll-table th {
+  text-align: center;
+  vertical-align: middle;
+  padding: 12px;
+  font-size: 2.2rem;
+}
+
+.enroll-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.enroll-view-btn {
+  padding: 6px 10px;
+}
+.enroll-approve-btn {
+  padding: 6px 10px;
+  background-color: #28a745 !important; /* Green for approve */
+}
+.enroll-reject-btn {
+  padding: 6px 10px;
+  background-color: #dc3545 !important; /* Red for reject */
+}
+/* Pagination Styling */
+.enroll-pagination {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px; /* Increased gap for better spacing */
+}
+
+.enroll-page-link {
+  display: inline-block;
+  padding: 10px 18px; /* Slightly larger padding for a more clickable area */
+  font-size: 1rem;
+  border-radius: 50px; /* Keep the circular shape */
+  color: #0d6efd;
+  border: 1px solid #e0e0e0; /* Softer border color */
+  background-color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+  font-weight: 500; /* Slightly bolder text */
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+.enroll-page-link:hover {
+  background-color: #0d6efd;
+  color: #0d6efd;
+  transform: translateY(-3px); /* More pronounced lift effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+  border-color: #0d6efd; /* Highlight border on hover */
+}
+
+.enroll-page-link.active {
+  background-color: #6c63ff;
+  color: #fff;
+  font-weight: 600;
+  border-color: transparent; /* Remove border for a cleaner look */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow for active state */
+}
+
+.enroll-page-link.active:hover {
+  transform: translateY(-2px); /* Subtle lift for active state on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+.action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+/* Search Form Styling */
+.enroll-search-form {
+  display: flex;
+  max-width: 300px; /* Slightly wider for better balance */
+  width: 100%;
+  border-radius: 50px; /* More rounded corners to match screenshot */
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Softer shadow for depth */
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  background-color: #fff; /* White background for a clean look */
+  border: none; /* Remove border for a flatter design */
+}
+
+.enroll-search-form:hover {
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12); /* Slightly stronger shadow on hover */
+  transform: translateY(-2px); /* Subtle lift effect */
+}
+
+.enroll-search-form .enroll-input {
+  flex-grow: 1;
+  padding: 16px 25px; /* More padding for comfort */
+  border: none;
+  outline: none;
+  font-size: 1.1rem; /* Slightly larger text for readability */
+  background-color: transparent; /* Remove background for a seamless look */
+  color: #333;
+  font-family: "Inter", "Segoe UI", sans-serif; /* Modern font stack */
+}
+
+.enroll-search-form .enroll-input::placeholder {
+  color: #aaa; /* Lighter placeholder color */
+  font-weight: 400; /* Slightly bolder placeholder text */
+  font-style: italic; /* Add a touch of elegance */
+}
+
+/* Search Button */
+.enroll-search-form .enroll-search-btn {
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  padding: 0 30px; /* More padding for a balanced button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500; /* Lighter font weight for a modern look */
+  text-transform: uppercase;
+  font-size: 0.95rem; /* Slightly larger text */
+  letter-spacing: 1px; /* More spacing for readability */
+  margin: 0;
+  width: 20%;
+}
+
+.enroll-search-form .enroll-search-btn:hover {
+  background: linear-gradient(
+    135deg,
+    #3a8fd9 0%,
+    #00c8d6 100%
+  ); /* Darker gradient on hover */
+  transform: scale(1.05); /* Slightly larger scale for emphasis */
+}
+
+.enroll-search-form .enroll-search-btn:active {
+  transform: scale(0.95); /* More noticeable press effect */
+}
+.status-registered {
+  color: #6c757d; /* Xám cho trạng thái vừa đăng ký */
+  background-color: #e9ecef;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.status-in-progress {
+  color: #f28c38; /* Cam cho trạng thái đang học */
+  background-color: #fff3cd;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.status-completed {
+  color: #28a745; /* Xanh lá cho trạng thái đã hoàn thành */
+  background-color: #d4edda;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}

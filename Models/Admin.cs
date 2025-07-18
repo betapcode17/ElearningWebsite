@@ -13,5 +13,5 @@ public partial class Admin
 
     public string? ImagePath { get; set; }
 
-    public virtual Account AdminNavigation { get; set; } = null!;
+    public virtual Account? AdminNavigation { get; set; } = null!;
 }

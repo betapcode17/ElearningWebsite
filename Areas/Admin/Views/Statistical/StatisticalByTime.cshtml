@@ -1,0 +1,107 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "RevenueStats";
+    Layout = "~/Areas/Admin/Views/AdminLayout.cshtml";
+}
+
+<link rel="stylesheet" href="~/AdminLayout/css/revenus-stats.css" />
+<div class="revenue-container">
+    <h1 class="heading">Thống kê doanh thu theo thời gian</h1>
+
+  
+    <div class="revenue-filter shadow-sm p-4 bg-white rounded mb-4">
+        <form asp-action="StatisticalByTime" method="get" class="d-flex align-items-center flex-wrap gap-3">
+            <input type="date" name="startDate" class="form-control revenue-input" value="@(ViewBag.StartDate != null ? ((DateOnly)ViewBag.StartDate).ToString("yyyy-MM-dd") : "")" />
+            <input type="date" name="endDate" class="form-control revenue-input" value="@(ViewBag.EndDate != null ? ((DateOnly)ViewBag.EndDate).ToString("yyyy-MM-dd") : "")" />
+            <input type="text" name="searchValue" class="form-control revenue-input" placeholder="Tìm kiếm khóa học..." value="@ViewBag.SearchValue" />
+            <button type="submit" class="btn btn-primary revenue-btn">
+                <i class="fas fa-search"></i> Lọc
+            </button>
+            <button type="button" class="btn btn-outline-secondary revenue-btn" onclick="exportReport()">Xuất báo cáo</button>
+        </form>
+    </div>
+
+   
+    <div class="revenue-summary shadow-sm p-4 bg-white rounded mb-4">
+        <h3>Tổng doanh thu: <span class="text-primary">@String.Format("{0:N0}", ViewBag.TotalRevenue) VNĐ</span></h3>
+    </div>
+
+  
+    <div class="revenue-charts shadow-sm p-4 bg-white rounded mb-4">
+        <h3>Doanh thu theo thời gian</h3>
+        <canvas id="revenueChart" width="400" height="150"></canvas>
+    </div>
+
+    <div class="revenue-table-wrapper table-responsive shadow-sm p-4 bg-white rounded">
+        <table class="table table-bordered table-hover revenue-table">
+            <thead class="table-dark">
+                <tr>
+                    <th>Khóa học</th>
+                    <th>Thời gian</th>
+                    <th>Số lượng đăng ký</th>
+                    <th>Doanh thu (VNĐ)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.CourseName</td>
+                        <td>@item.TimePeriod</td>
+                        <td>@item.EnrollmentCount</td>
+                        <td>@String.Format("{0:N0}", item.Revenue)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        const revenueChart = new Chart(ctx, {
+            type: 'line', // biểu đồ đường
+            data: {
+                labels: @Html.Raw(Json.Serialize(ViewBag.ChartLabels)),
+                datasets: [{
+                    label: 'Doanh thu',
+                    data: @Html.Raw(Json.Serialize(ViewBag.ChartData)),
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    tension: 0.3,
+                    fill: true,
+                    borderWidth: 2,
+                    pointRadius: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Thời gian'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Doanh thu (VND)'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}

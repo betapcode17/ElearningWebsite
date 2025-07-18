@@ -2,46 +2,38 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 public static class MyUtil
 {
-    public static string UploadImg(IFormFile img, string folderName)
+    public static async Task<string> UploadImg(IFormFile imageFile, string folderName)
     {
-        if (img == null || img.Length == 0)
+        if (imageFile == null || imageFile.Length == 0)
         {
             return null;
         }
 
         try
         {
-            Console.WriteLine(img);
-            // Lấy đường dẫn wwwroot mặc định
             string webRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-
-            // Tạo đường dẫn thư mục lưu ảnh
             string folderPath = Path.Combine(webRootPath, "images", folderName);
 
-            // Tạo thư mục nếu chưa tồn tại
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
             }
 
-            // Xử lý tên file
-            string fileName = Path.GetFileNameWithoutExtension(img.FileName);
+            string fileName = Path.GetFileNameWithoutExtension(imageFile.FileName);
             fileName = RemoveInvalidChars(fileName);
-            fileName += Path.GetExtension(img.FileName);
+            fileName += Path.GetExtension(imageFile.FileName);
 
-            // Đường dẫn đầy đủ
             string filePath = Path.Combine(folderPath, fileName);
 
-            // Ghi file
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                img.CopyTo(stream); // dùng đồng bộ cho đơn giản
+                await imageFile.CopyToAsync(stream);
             }
 
-            // Trả về đường dẫn tương đối
             return Path.Combine("images", folderName, fileName).Replace("\\", "/");
         }
         catch (Exception ex)

@@ -1,0 +1,74 @@
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@model IPagedList<Enrollment>
+@{
+    ViewData["Title"] = "InProgressCourses";
+    var CourseList = ViewBag.CourseList as List<Course>;
+}
+@if ( CourseList?.Count > 0)
+{
+    <section class="courses">
+        <h1 class="heading">On going courses</h1>
+
+        <div class="box-container">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                var course = CourseList[i];
+                var enrollment = Model[i];
+                <div class="box">
+
+                    <div class="flex">
+                        <div class="course-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>@course.StartDate.ToString("dd/MM/yyyy")</span>
+                        </div>
+                    </div>
+                    <div class="thumb">
+                        <img src="~/@course?.ImgPath" alt="" />
+                        <span>@course?.VideoCount videos</span>
+                    </div>
+
+                    <h3 class="title">@course?.CourseName</h3>
+
+                    <ul class="course-info">
+
+                        <li>
+                            <p>Tuition Fee</p>
+                            <p class="value-box">@String.Format("{0:#,##0}₫", course?.TuitionFee)</p>
+                        </li>
+                        <li>
+                            <p>Enrolled</p>
+                            <p class="value-box">
+                                <span class="enrolled">@course?.CurrentStudents</span> /
+                                <span class="max">@course?.MaxStudents</span>
+                            </p>
+                        </li>
+                    </ul>
+
+
+                    <div class="flex-btn">
+                        <a asp-action="Details" asp-controller="Courses" asp-route-id="@course.CourseId" class="inline-btn"> View course</a>
+                    </div>
+
+
+                </div>
+            }
+        </div>
+
+        <div class="pagination">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new
+                {
+                    page,
+                    search_box = ViewBag.CurrentFilter // Truyền lại giá trị tìm kiếm
+                }))
+        </div>
+
+    </section>
+}else{
+    <section class="courses">
+        <h1 class="heading">Bạn không đang học khóa học nào!!!</h1>
+    </section>
+}
+
+
+

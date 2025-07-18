@@ -1,0 +1,90 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Statistical Dashboard";
+    Layout = "~/Areas/Admin/Views/AdminLayout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link rel="stylesheet" href="~/AdminLayout/css/DashBoard.css" />
+<div class="dashboard-container">
+  
+    <div class="dashboard-header text-center">
+        <h1 class="main-title">
+            <i class="fas fa-chart-line"></i> Statistical Dashboard
+        </h1>
+    </div>
+
+    <div class="section-wrapper">
+        <h2 class="section-title text-center">Key Metrics</h2>
+        <div class="stats-grid">
+           
+            <div class="stat-card">
+                <div class="stat-number">@ViewBag.TotalStudent</div>
+                <h3 class="stat-title">Total Students</h3>
+                <div class="stat-desc">Currently enrolled</div>
+            </div>
+
+            
+            <div class="stat-card">
+                <div class="stat-number">@ViewBag.TotalCourse</div>
+                <h3 class="stat-title">Total Courses</h3>
+                <div class="stat-desc">Available programs</div>
+            </div>
+
+            
+            <div class="stat-card">
+                <div class="stat-number">@ViewBag.TotalEnrollment</div>
+                <h3 class="stat-title">Total Enrollments</h3>
+                <div class="stat-desc">Course registration</div>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="section-wrapper">
+        <h2 class="section-title text-center">Statistical Reports</h2>
+        <div class="reports-grid">
+         
+            <a asp-action="StatisticalbyCourse" class="report-card">
+                <div class="report-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <div class="report-content">
+                    <h3 class="report-title">Revenue by Course</h3>
+                    <div class="report-desc">View earnings per course</div>
+                </div>
+                <div class="report-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+
+          
+            <a asp-action="StatisticalbyTime" class="report-card">
+                <div class="report-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="report-content">
+                    <h3 class="report-title">Revenue by Time</h3>
+                    <div class="report-desc">Weekly/Monthly trends</div>
+                </div>
+                <div class="report-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+
+           
+            <a asp-action="EnrollmentStatsByCourse" class="report-card">
+                <div class="report-icon">
+                    <i class="fas fa-signal"></i>
+                </div>
+                <div class="report-content">
+                    <h3 class="report-title">Enrollment Statistics</h3>
+                    <div class="report-desc">Course registration trends</div>
+                </div>
+                <div class="report-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

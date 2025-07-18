@@ -1,0 +1,168 @@
+/* ~/AdminLayout/css/EditInfoStudent.css */
+
+/* Base Styles */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  color: #2d3748;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+h1 {
+  color: #2d3748;
+  font-size: 2.8rem;
+  margin-bottom: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Card and Form Layout */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 3rem 4rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 2.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 1.8rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 1.5rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1.6rem;
+  background-color: #f8fafc;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+}
+
+/* Radio Buttons */
+.radio-group {
+  display: flex;
+  gap: 3rem;
+  margin-top: 1.5rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.radio-option input[type="radio"] {
+  width: 2.2rem;
+  height: 2.2rem;
+  accent-color: #4299e1;
+}
+
+.radio-option label {
+  font-size: 1.8rem;
+  color: #4a5568;
+}
+
+/* Button Container */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+/* Button Styles */
+.btn {
+  padding: 1.5rem 3rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.8rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  min-width: 200px;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #4299e1;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #3182ce;
+  transform: translateY(-3px);
+}
+
+.btn-outline {
+  background-color: white;
+  color: #4a5568;
+  border: 2px solid #e2e8f0;
+}
+
+.btn-outline:hover {
+  background-color: #f7fafc;
+  transform: translateY(-3px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .card {
+    padding: 2rem;
+  }
+
+  .form-label {
+    font-size: 1.5rem;
+  }
+
+  .form-control {
+    padding: 1.2rem;
+    font-size: 1.4rem;
+  }
+
+  .radio-group {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .button-container {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .btn {
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 1.2rem;
+  }
+}

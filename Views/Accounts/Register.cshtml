@@ -19,21 +19,21 @@
 </head>
 <body>
     <div class="login-container">
-        <!-- Phần bên trái: Form đăng ký -->
+      
         <div class="login-form">
-            <!-- Logo -->
+           
             <div class="logo">
                 <i class="fa-solid fa-book-open" style="margin-right: 10px"></i>
                 SmartLearn
             </div>
 
-            <!-- Tiêu đề -->
+          
             <h1>REGISTER NOW!</h1>
-            <p>Already have an account, <a href="login.html">Sign in</a></p>
+            <p>Already have an account, <a asp-action="Login">Sign in</a></p>
 
-            <!-- Form đăng ký -->
+         
             <form asp-controller="Accounts" asp-action="Register" enctype="multipart/form-data">
-                <!-- Hàng 1: Full Name và Username -->
+              
                 <div class="form-row">
                     <div class="input-group">
                         <label asp-for="@Model.FullName">Full Name</label>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <!-- Hàng 2: Email và Phone Number -->
+               
                 <div class="form-row">
                     <div class="input-group">
                         <label asp-for="@Model.Email">Email</label>
@@ -75,7 +75,7 @@
                     </div>
                 </div>
 
-                <!-- Hàng 3: Password và Confirm Password -->
+               
                 <div class="form-row">
                     <div class="input-group">
                         <label asp-for="@Model.Password">Password</label>
@@ -96,7 +96,7 @@
                         <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
                     </div>
                 </div>
-                <!-- Hàng mới: Date of Birth và Image Upload -->
+             
                 <div class="form-row">
                     <div class="input-group">
                         <label asp-for="@Model.DateOfBirth">Date of Birth</label>
@@ -105,17 +105,16 @@
                                required />
                         <span asp-validation-for="@Model.DateOfBirth" class="text-danger"></span>
                     </div>
-
                     <div class="input-group">
                         <label for="ProfileImg">Profile Image</label>
-                        <input type="file" name="ProfileImg"
-                               id="profile-image"
-                               accept="image/*" />
+                        <input type="file" name="ProfileImg" id="profile-image" accept="image/*" />
+            
+                        <input type="hidden" asp-for="@Model.ImagePath" />
                     </div>
                 </div>
                 
    
-                <!-- Trường Gender -->
+               
                 <div class="input-group">
                     <label>Gender</label>
                     <div class="gender-options">
@@ -130,14 +129,14 @@
 
                     </div>
                 </div>
-                <!-- Nút Register -->
+             
                 <button type="submit" class="sign-in-btn">Register</button>
             </form>
         </div>
 
-        <!-- Phần bên phải: Hình minh họa -->
+       
         <div class="illustration">
-            <!-- Sử dụng cùng hình minh họa như trang đăng nhập -->
+          
             <img src="~/UserLayout/images/Exlorer_Illustration 1.png" alt="Illustration" />
         </div>
     </div>

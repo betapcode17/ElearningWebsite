@@ -1,0 +1,88 @@
+.modern-alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  width: 350px;
+  max-width: 90%;
+  z-index: 9999;
+  animation: slideFadeIn 0.4s ease-out;
+  font-family: 'Segoe UI', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.modern-alert.success {
+  border-left: 5px solid #28a745;
+}
+
+.modern-alert.error {
+  border-left: 5px solid #dc3545;
+}
+
+.alert-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.success .alert-icon {
+  background-color: #28a745;
+  color: white;
+}
+
+.error .alert-icon {
+  background-color: #dc3545;
+  color: white;
+}
+
+.alert-content {
+  flex-grow: 1;
+}
+
+.alert-content strong {
+  display: block;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+.alert-content p {
+  margin: 2px 0 0;
+  color: #777;
+  font-size: 14px;
+}
+
+.alert-close {
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #999;
+  margin-left: 10px;
+  transition: color 0.2s;
+}
+
+.alert-close:hover {
+  color: #333;
+}
+
+@keyframes slideFadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}

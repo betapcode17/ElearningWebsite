@@ -1,0 +1,60 @@
+﻿@model ElearningWebsite.Models.Course
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/AdminLayout.cshtml";
+}
+
+
+<section class="playlist-form">
+    <h1 class="heading">Edit Course</h1>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+
+        <!-- Course ID (hiển thị nếu có) -->
+        @if (!string.IsNullOrEmpty(Model.CourseId))
+        {
+            <p>Course ID <span>*</span></p>
+            <input type="text"
+                   name="CourseId"
+                   maxlength="10"
+                   readonly
+                   value="@Model.CourseId"
+                   class="box" />
+        }
+
+        <p>Course Name <span>*</span></p>
+        <input type="text" name="CourseName" required value="@Model.CourseName" class="box" />
+
+        <p>Instructor <span>*</span></p>
+        <input type="text" name="Instructor" required value="@Model.Instructor" class="box" />
+
+        <p>Start Date <span>*</span></p>
+        <input type="date" name="StartDate" required value="@Model.StartDate.ToString("yyyy-MM-dd")" class="box" />
+
+        <p>Tuition Fee <span>*</span></p>
+        <input type="number" name="TuitionFee" required value="@Model.TuitionFee" step="0.01" class="box" />
+
+        <p>Max Students <span>*</span></p>
+        <input type="number" name="MaxStudents" required value="@Model.MaxStudents" class="box" />
+
+        <p>Video Count <span>*</span></p>
+        <input type="number" name="VideoCount" required value="@Model.VideoCount" class="box" />
+
+        <p>Description <span>*</span></p>
+        <textarea name="Description" class="box" required>@Model.Description</textarea>
+
+        <p>Playlist Thumbnail <span>*</span></p>
+        <input type="file" name="imageFile" accept="image/*" class="box" />
+        <span class="text-danger" data-valmsg-for="imageFile" data-valmsg-replace="true"></span>
+
+        @if (!string.IsNullOrEmpty(Model.ImgPath))
+        {
+            <p>Current Image:</p>
+            <img src="~/@Model.ImgPath" alt="Course Thumbnail" style="width: 100px;" />
+        }
+
+        <input type="submit" value="Edit Playlist" class="btn" />
+    </form>
+</section>

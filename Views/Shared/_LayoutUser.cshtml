@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 @{
     ViewData["Title"] = "_LayoutUser";
 }
@@ -19,7 +19,7 @@
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
 
     <!-- custom css file link  -->
 
@@ -29,8 +29,42 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ElearningWebsite.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/UserLayout/css/style.css" />
+    <link rel="stylesheet" href="~/AdminLayout/css/site.css" />
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+
 </head>
 <body>
+    @if (TempData.ContainsKey("SuccessMessage"))
+    {
+        <div id="customAlertSuccess" class="modern-alert success">
+            <div class="alert-icon">
+                <span>✔</span>
+            </div>
+            <div class="alert-content">
+                <strong>Success</strong>
+                <p>@TempData["SuccessMessage"]</p>
+            </div>
+            <div class="alert-close" onclick="this.parentElement.remove()">×</div>
+        </div>
+    }
+
+    @if (TempData.ContainsKey("Error"))
+    {
+        <div id="customAlertError" class="modern-alert error">
+            <div class="alert-icon">
+                <span>⚠</span>
+            </div>
+            <div class="alert-content">
+                <strong>Error</strong>
+                <p>@TempData["Error"]</p>
+            </div>
+            <div class="alert-close" onclick="this.parentElement.remove()">×</div>
+        </div>
+    }
+
+
+
     <header class="header">
         <section class="flex">
             <a href="home.html" class="logo">
@@ -74,7 +108,7 @@
                     }
 
                     <div class="flex-btn">
-                        <a href="profile.html" class="option-btn">view profile</a>
+                        <a  asp-action="Profile" asp-controller="Accounts"   class="option-btn">view profile</a>
                         <a asp-action="Logout" asp-controller="Accounts" class="option-btn">Logout</a>
                     </div>
 
@@ -124,10 +158,19 @@
 
         <nav class="navbar">
             <a asp-action="Index" asp-controller="Home"><i class="fas fa-home"></i><span>home</span></a>
-            <a asp-action="About" asp-controller="Home"><i class="fas fa-question"></i><span>about</span></a>
-            <a asp-action="Index" asp-controller="Courses"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
-            <a asp-action="Teacher" asp-controller="Home"><i class="fas fa-chalkboard-user"></i><span>teachers</span></a>
-            <a asp-action="Contact" asp-controller="Home"><i class="fas fa-headset"></i><span>contact us</span></a>
+            <a asp-action="Index" asp-controller="Courses"><i class="fas fa-graduation-cap"></i><span>Our Courses</span></a>
+            <a asp-action="Index" asp-controller="Enrollment">
+                <i class="fas fa-book-open"></i>
+                <span>My Courses</span>
+            </a>
+            <a asp-action="InProgressCourses" asp-controller="Enrollment">
+                <i class="fas fa-play-circle"></i>
+                <span>Ongoing</span>
+            </a>
+            <a asp-action="CompletedCourses" asp-controller="Enrollment">
+                <i class="fas fa-check-circle"></i>
+                <span>Completed</span>
+            </a>
         </nav>
     </div>
     @RenderBody()
@@ -136,6 +179,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/AdminLayout/js/alert.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

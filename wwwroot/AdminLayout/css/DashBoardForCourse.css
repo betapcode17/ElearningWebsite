@@ -1,0 +1,103 @@
+.stats-container {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  margin: 30px auto;
+  max-width: 1200px; /* Giới hạn chiều rộng để bảng gọn hơn */
+}
+
+.stats-title {
+  color: #1a2b49;
+  font-size: 1.8rem; /* Tăng kích cỡ chữ tiêu đề */
+  font-weight: 700;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e8ecef;
+}
+
+.stats-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 1rem; /* Tăng kích cỡ chữ cho nội dung bảng */
+  color: #34495e;
+}
+
+.stats-table thead tr {
+  background: linear-gradient(135deg, #4a90e2, #357abd); /* Gradient xanh nhẹ */
+  color: #ffffff;
+}
+
+.stats-table th {
+  padding: 14px 16px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem; /* Chữ tiêu đề nhỏ hơn nội dung một chút */
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  border-bottom: 2px solid #e8ecef;
+}
+
+.stats-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f3f5;
+  font-size: 2rem; /* Kích cỡ chữ rõ ràng */
+  vertical-align: middle;
+  text-align: center;
+}
+
+.stats-table tbody tr:hover {
+  background: #f7f9fc; /* Hover sáng nhẹ hơn */
+  transition: background 0.2s ease;
+}
+
+.course-code {
+  color: #2e7bc4;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.revenue {
+  color: #e63946;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.stats-table tfoot tr {
+  background: #e6f0fa; /* Nền xanh nhạt cho tổng */
+  font-weight: 700;
+  font-size: 1.05rem; /* Chữ tổng to hơn một chút */
+}
+
+.stats-table tfoot td {
+  padding: 16px;
+  border-top: 3px solid #4a90e2; /* Viền xanh nổi bật */
+  border-bottom: none;
+}
+
+.total-label {
+  color: #1a2b49;
+  font-weight: 700;
+}
+
+.total-value {
+  color: #e63946;
+  font-weight: 700;
+}
+.table-scroll-wrapper {
+  border: 1px solid #e8ecef;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.scrollable-body {
+  max-height: 300px; /* Chiều cao bảng có thể điều chỉnh */
+  overflow-y: auto;
+}
+
+.scrollable-body table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}

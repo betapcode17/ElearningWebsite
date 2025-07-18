@@ -19,7 +19,7 @@ public partial class Course
 
     public int VideoCount { get; set; }
 
-    public int? CurrentStudents { get; set; }
+    public int? CurrentStudents { get; set; } = 0;
 
     public string? ImgPath { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿@using X.PagedList.Mvc.Core;
 @using X.PagedList;
-@model IPagedList<Course> 
+@model IPagedList<Course>
 @{
     ViewData["Title"] = "Index";
 }
@@ -8,103 +8,100 @@
 <section class="courses">
     <h1 class="heading">our courses</h1>
 
-    <div class="box-container">
-       
-       @foreach(var course in Model )
-       {
-            <div class="box">
-                <div class="tutor">
-                    <img src="~/UserLayout/images/pic-2.jpg" alt="" />
-                    <div class="info">
-                        <h3>@course.Instructor</h3>
-                    </div>
+    
+    <div class="course-filter">
+        <form asp-action="Index" method="get" class="filter-form">
+          
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="search_box">Name Course</label>
+                    <input type="text" name="search_box" id="search_box" class="form-control" placeholder="Tìm kiếm khóa học..." value="@ViewBag.CurrentFilter" />
                 </div>
-                <div class="thumb">
-                    <img src="~/@course.ImgPath" alt="" />
-                    <span>@course.VideoCount</span>
+                <div class="filter-group">
+                    <label for="instructorName">Name Instructor</label>
+                    <input type="text" name="instructorName" id="instructorName" class="form-control" placeholder="Tìm kiếm giảng viên..." value="@ViewBag.InstructorName" />
                 </div>
-                <h3 class="title">@course.CourseName</h3>
-                <ul class="course-info">
-                    <li>
-                        <p>Start Date</p>
-                        <p class="value-box">@course.StartDate</p>
-                    </li>
-                    <li>
-                        <p>Tuition Fee</p>
-                        <p class="value-box">@course.TuitionFee</p>
-                    </li>
-                    <li>
-                        <p>Enrolled</p>
-                        <p class="value-box">
-                            <span class="enrolled">@course.CurrentStudents</span> / <span class="max">@course.MaxStudents</span>
-                        </p>
-                    </li>
-                </ul>
-
-                <a asp-action="Details" asp-controller="Courses" asp-route-id="@course.CourseId" class="inline-btn"> View course</a>
+                <div class="filter-group">
+                    <label for="startDateFrom">Start Date From</label>
+                    <input type="date" name="startDateFrom" id="startDateFrom" class="form-control" value="@ViewBag.StartDateFrom" />
+                </div>
+                <div class="filter-group">
+                    <label for="startDateTo">Start Date To</label>
+                    <input type="date" name="startDateTo" id="startDateTo" class="form-control" value="@ViewBag.StartDateTo" />
+                </div>
             </div>
-       }   
+           
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="costMin">Cost Min</label>
+                    <input type="number" name="costMin" id="costMin" class="form-control" placeholder="Học phí tối thiểu" value="@ViewBag.CostMin" step="0.01" />
+                </div>
+                <div class="filter-group">
+                    <label for="costMax">Cost Max</label>
+                    <input type="number" name="costMax" id="costMax" class="form-control" placeholder="Học phí tối đa" value="@ViewBag.CostMax" step="0.01" />
+                </div>
+                <div class="filter-group filter-submit">
+                    <button type="submit" class="inline-btn">Lọc</button>
+                </div>
+            </div>
+        </form>
     </div>
+
+   
+    <div class="box-container">
+        @if (!Model.Any())
+        {
+            <p class="text-center text-muted">Không có khóa học nào phù hợp.</p>
+        }
+        else
+        {
+            @foreach (var course in Model)
+            {
+                <div class="box">
+                    <div class="flex">
+                        <div class="course-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>@course.StartDate.ToString("dd/MM/yyyy")</span>
+                        </div>
+                    </div>
+                    <div class="thumb">
+                        <img src="~/@course.ImgPath" alt="" />
+                        <span>@course.VideoCount</span>
+                    </div>
+                    <h3 class="title">@course.CourseName</h3>
+                    <p class="description">
+                        @course.Description
+                    </p>
+                    <ul class="course-info">
+                        <li>
+                            <p>Tuition Fee</p>
+                            <p class="value-box">@course.TuitionFee VND</p>
+                        </li>
+                        <li>
+                            <p>Enrolled</p>
+                            <p class="value-box">
+                                <span class="enrolled">@course.CurrentStudents</span> / <span class="max">@course.MaxStudents</span>
+                            </p>
+                        </li>
+                    </ul>
+                    <a asp-action="Details" asp-controller="Courses" asp-route-id="@course.CourseId" class="inline-btn">View course</a>
+                </div>
+            }
+        }
+    </div>
+
+  
     <div class="pagination">
         @Html.PagedListPager(Model, page => Url.Action("Index", new
             {
                 page,
-                search_box = ViewBag.CurrentFilter // Truyền lại giá trị tìm kiếm
+                search_box = ViewBag.CurrentFilter,
+                instructorName = ViewBag.InstructorName,
+                startDateFrom = ViewBag.StartDateFrom,
+                startDateTo = ViewBag.StartDateTo,
+                costMin = ViewBag.CostMin,
+                costMax = ViewBag.CostMax
             }))
     </div>
 </section>
-<style>
-    /* CSS phân trang */
-    .pagination {
-        display: flex;
-        justify-content: center;
-        margin: 30px 0;
-        list-style: none;
-        padding: 0;
-    }
 
-        .pagination li {
-            margin: 0 5px;
-        }
-
-        .pagination a,
-        .pagination span {
-            display: inline-block;
-            padding: 8px 15px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .pagination a {
-            color: #555;
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-        }
-
-            .pagination a:hover {
-                background-color: #e9ecef;
-                border-color: #dee2e6;
-            }
-
-        .pagination .active a,
-        .pagination .active span {
-            background-color: #007bff;
-            color: white;
-            border-color: #007bff;
-        }
-
-        .pagination .disabled span {
-            color: #6c757d;
-            background-color: #f8f9fa;
-            border-color: #dee2e6;
-            cursor: not-allowed;
-        }
-
-        /* Hiệu ứng khi hover */
-        .pagination a:not(.active):hover {
-            transform: translateY(-2px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-</style>

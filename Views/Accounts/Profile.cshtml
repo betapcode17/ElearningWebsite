@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewData["Title"] = "Profile";
+}
+@using System.Security.Claims
+@{
+    var fullName = User.FindFirstValue("FullName");
+    var email = User.FindFirstValue("Email");
+    var imagePath = User.FindFirstValue("ImagePath");
+    var role = User.FindFirstValue(ClaimTypes.Role);
+}
+<section class="user-profile">
+
+    <h1 class="heading">your profile</h1>
+
+    <div class="info">
+
+        <div class="user">
+            <img src="~/@imagePath" alt="">
+            <h3>@fullName</h3>
+            <p>
+                @if (role == "0") 
+                {
+                <p class="role">Student</p>
+                }
+                @if (role == "1")
+                {
+                <p class="role">Admin</p>
+                }</p>
+            <a asp-action="UpdateProfile" asp-controller="Accounts" class="inline-btn">update profile</a>
+        </div>
+
+       @if(role == "0"){
+            <div class="box-container">
+
+                <div class="box">
+                    <div class="flex">
+                        <i class="fas fa-bookmark"></i>
+                        <div>
+                            <span>@ViewBag.enrollmentCount</span>
+                            <p>Khóa học của bạn</p>
+                        </div>
+                    </div>
+                    <a  asp-controller="Enrollment" asp-action="Index"  class="inline-btn">view Course</a>
+                </div>
+
+                <div class="box">
+                    <div class="flex">
+                        <i class="fas fa-heart"></i>
+                        <div>
+                          
+                          
+                            <span>@ViewBag.InProgessCourse</span>
+                            <p>Khóa học đang học</p>
+                        </div>
+                    </div>
+                    <a asp-controller="Enrollment" asp-action="InProgressCourses" class="inline-btn">Xem khóa học</a>
+                </div>
+
+                <div class="box">
+                    <div class="flex">
+                        <i class="fas fa-comment"></i>
+                        <div>
+                            <span>@ViewBag.CompletedCourse</span>
+                            <p>Khóa học đã hoàn thành</p>
+                        </div>
+                    </div>
+                    <a asp-action="CompletedCourses" asp-controller="Enrollment" class="inline-btn">view comments</a>
+                </div>
+
+            </div>
+       }
+    </div>
+
+</section>
+
+

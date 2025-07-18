@@ -1,0 +1,51 @@
+﻿@model ElearningWebsite.Models.Student
+@{
+    ViewData["Title"] = "Create Student";
+    Layout = "~/Areas/Admin/Views/AdminLayout.cshtml";
+}
+
+<section class="student-form">
+    <h1 class="heading">Create Student</h1>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        @if (!string.IsNullOrEmpty(Model.StudentId))
+        {
+            <p>Student ID <span>*</span></p>
+            <input type="text"
+                   name="StudentId"
+                   maxlength="10"
+                   readonly
+                   value="@Model.StudentId"
+                   class="box" />
+        }
+
+        <p>Full Name <span>*</span></p>
+        <input type="text" name="FullName" required value="@Model.FullName" class="box" />
+
+        <p>Date of Birth <span>*</span></p>
+        <input type="date" name="DateOfBirth" required value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" class="box" />
+
+        <p>Phone Number <span>*</span></p>
+        <input type="text" name="PhoneNumber" required value="@Model.PhoneNumber" class="box" />
+
+        <p>Email <span>*</span></p>
+        <input type="email" name="Email" required value="@Model.Email" class="box" />
+
+        <p>Gender</p>
+        <select name="Gender" class="box">
+            <option value="" selected disabled>Select Gender</option>
+            <option value="0" @(Model.Gender == 0 ? "selected" : "")>Male</option>
+            <option value="1" @(Model.Gender == 1 ? "selected" : "")>Female</option>
+        </select>
+
+        <p>Profile Image</p>
+        <input type="file" name="imageFile" accept="image/*" class="box" />
+        <span class="text-danger" data-valmsg-for="imageFile" data-valmsg-replace="true"></span>
+
+   
+
+        <input type="submit" value="Create Student" class="btn" />
+    </form>
+</section>
+<link rel="stylesheet" href="~/AdminLayout/css/CreateStudent.css" />

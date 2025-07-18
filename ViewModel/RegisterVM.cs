@@ -24,7 +24,7 @@ namespace ElearningWebsite.ViewModel
         public DateOnly DateOfBirth { get; set; }
         [Required(ErrorMessage = "Phone cannot be blank.")]
         [Phone(ErrorMessage = "Invalid phone number.")]
-        [StringLength(15, ErrorMessage = "Phone number cannot be longer than 15 characters.")]
+        [StringLength(10, ErrorMessage = "Phone number cannot be longer than 10 characters.")]
         public string? PhoneNumber
         {
             get; set;

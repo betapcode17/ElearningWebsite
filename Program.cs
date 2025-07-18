@@ -59,3 +59,4 @@ app.MapControllerRoute(
 
 
 app.Run();
+app.UseStaticFiles();

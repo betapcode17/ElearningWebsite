@@ -1,4 +1,5 @@
 ﻿
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "AdminLayout";
 }
@@ -25,12 +26,61 @@
 
     <title>@ViewData["Title"] - ElearningWebsite</title>
     <script type="importmap"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ElearningWebsite.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/UserLayout/css/style.css" />
+    <link rel="stylesheet" href="~/AdminLayout/css/style.css" />
+    <link rel="stylesheet" href="~/AdminLayout/css/ManagerLayout.css" />
+    <link rel="stylesheet" href="~/AdminLayout/css/DashBoardForCourse.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="~/AdminLayout/css/Modal.css" />
+    <link rel="stylesheet" href="~/AdminLayout/css/site.css" />
+    <link rel="stylesheet" href="~/AdminLayout/css/popup.css" />
+    <link rel="stylesheet" href="~/AdminLayout/js/popup.js" />
+   
 </head>
+
+
+
 <body>
+
+    @if (TempData.ContainsKey("SuccessMessage"))
+    {
+        <div id="customAlert" class="modern-alert success">
+            <div class="alert-icon">
+                <span>✔</span>
+            </div>
+            <div class="alert-content">
+                <strong>Success</strong>
+                <p>@TempData["SuccessMessage"]</p>
+            </div>
+            <div class="alert-close" onclick="this.parentElement.remove()">×</div>
+        </div>
+    }
+
+    @if (TempData.ContainsKey("Error"))
+    {
+        <div id="customAlertError" class="modern-alert error">
+            <div class="alert-icon">
+                <span>⚠</span>
+            </div>
+            <div class="alert-content">
+                <strong>Error</strong>
+                <p>@TempData["Error"]</p>
+            </div>
+            <div class="alert-close" onclick="this.parentElement.remove()">×</div>
+        </div>
+    }
+
+
+
     <header class="header">
         <section class="flex">
             <a href="home.html" class="logo">
@@ -65,21 +115,10 @@
                     {
                         <img src="~/UserLayout/images/pic-1.jpg" class="image" alt="" />
                     }
-                    <h3 class="name">@fullName</h3>
-
-                    @if (role == "0") // Hoặc userType == "Student"
-                    {
-                        <p class="role">Student</p>
-                    }
-                    @if (role == "1")
-                    {
+                    <h3 class="name">@fullName</h3>            
                         <p class="role">Admin</p>
-                    }
-
-                    <div class="flex-btn">
-                        <a href="profile.html" class="option-btn">view profile</a>
-                        <a asp-action="Logout" asp-controller="Accounts" class="option-btn">Logout</a>
-                    </div>
+                        <a asp-action="Logout" asp-controller="AccountsManager" class="option-btn">Logout</a>
+                    
 
 
                 </div>
@@ -113,31 +152,33 @@
                 }
             </div>
         }
-        else
-        {
-            <div class="profile">
-                <h1>Please Login or Register</h1>
-                <div class="flex-btn">
-                    <a asp-action="Login" asp-controller="Accounts" class="option-btn">login</a>
-                    <a asp-action="Register" asp-controller="Accounts" class="option-btn">register</a>
-                </div>
-            </div>
-        }
 
 
         <nav class="navbar">
-            <a href="home.html"><i class="fas fa-home"></i><span>home</span></a>
-            <a href="about.html"><i class="fas fa-question"></i><span>about</span></a>
-            <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
-            <a href="teachers.html"><i class="fas fa-chalkboard-user"></i><span>teachers</span></a>
-            <a href="contact.html"><i class="fas fa-headset"></i><span>contact us</span></a>
+            <a asp-controller="Statistical" asp-action="Statistical">
+                <i class="fa-solid fa-house"></i><span>DashBoard</span>
+            </a>
+            <a asp-controller="AccountsManager" asp-action="Index">
+                <i class="fas fa-user-circle"></i><span>Accounts</span>
+            </a>
+            <a asp-controller="StudentsManager" asp-action="Index">
+                <i class="fa-solid fa-graduation-cap"></i><span>Students</span>
+            </a>
+            <a asp-controller="EnrollmentManager" asp-action="Index">
+                <i class="fas fa-clipboard-list"></i><span>Enrollment</span>
+            </a>
+            <a asp-controller="CoursesManager" asp-action="Index">
+                <i class="fas fa-graduation-cap"></i><span>Courses</span>
+            </a>
         </nav>
+
     </div>
     @RenderBody()
     <!-- custom js file link  -->
     <script src="~/UserLayout/js/script.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

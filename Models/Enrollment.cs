@@ -13,7 +13,7 @@ public partial class Enrollment
 
     public DateOnly EnrollmentDate { get; set; }
 
-    public string Status { get; set; } = null!;
+    public int? Progress { get; set; }
 
     public virtual Course Course { get; set; } = null!;
 

@@ -1,0 +1,66 @@
+﻿@model ElearningWebsite.ViewModel.RegisterVM
+@{
+    ViewData["Title"] = "UpdateProfile";
+}
+
+<section class="form-container">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <form asp-action="UpdateProfile" method="post" enctype="multipart/form-data">
+        <h3>Update Profile</h3>
+        <input type="hidden" asp-for="UserId" />
+
+        <p>Username</p>
+        <input asp-for="Username" class="box" maxlength="50" placeholder="Username" />
+        <span asp-validation-for="Username" class="text-danger"></span>
+
+        <p>New Password</p>
+        <input asp-for="Password" class="box" type="password" placeholder="Leave blank if not changing" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+
+        <p>Confirm New Password</p>
+        <input asp-for="ConfirmPassword" class="box" type="password" placeholder="Confirm new password" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+        <p>Full name</p>
+        <input asp-for="FullName" class="box" maxlength="50" placeholder="Your name" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+
+        <p>Email</p>
+        <input asp-for="Email" class="box" maxlength="50" placeholder="yourname@example.com" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+
+        <p>Phone number</p>
+        <input asp-for="PhoneNumber" class="box" maxlength="15" placeholder="0123456789" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+        <p>Date of Birth</p>
+        <input asp-for="DateOfBirth" class="box" />
+        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+
+        <p>Gender</p>
+        <select asp-for="Gender" class="box">
+            <option value="">-- Select gender --</option>
+            <option value="1">Male</option>
+            <option value="0">Female</option>
+            <option value="2">Other</option>
+        </select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+
+        <p>Update profile image</p>
+        <input type="file" name="imageFile" accept="image/*" class="box" />
+        <span class="text-danger" data-valmsg-for="imageFile" data-valmsg-replace="true"></span>
+      
+        <input type="submit" value="Update Profile" class="btn" />
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

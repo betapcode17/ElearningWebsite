@@ -36,38 +36,56 @@
                     </li>
                     <li>
                         <p>Tuition Fee</p>
-                        <p class="value-box">@Model.TuitionFee</p>
+                        <p class="value-box">@Model.TuitionFee VND</p>
                     </li>
                     <li>
                         <p>Enrolled</p>
                         <p class="value-box">
-                           @Model.CurrentStudents/@Model.MaxStudents
+                            @Model.CurrentStudents/@Model.MaxStudents
                         </p>
                     </li>
+                    @if (ViewBag.IsEnrolled)
+                    {
+                        <li>
+                          
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: @ViewBag.Progress%">@ViewBag.Progress%</div>
+                            </div>
+                        </li>
+                    }
                 </ul>
                 <p>
                     @Model.Description
                 </p>
-                <a asp-action="Details" name="@Model.CourseId" asp-controller="Courses" class="inline-btn">Register now</a>
+                @if (!ViewBag.IsEnrolled)
+                {
+                    <form asp-action="RegisterCourse" asp-controller="Enrollment" method="post">
+                        <input type="hidden" name="id" value="@Model.CourseId" />
+                        <button type="submit" class="inline-btn">Register Now</button>
+                    </form>
+                }
+
             </div>
         </div>
     </div>
 </section>
 
+
 <section class="playlist-videos">
     <h1 class="heading">playlist videos</h1>
-
     <div class="box-container">
-
         @for (int i = 1; i <= Model.VideoCount; i++)
         {
-            <a class="box" href="watch-video.html">
+            <a class="box" asp-action="WatchVideo" asp-controller="Courses" asp-route-courseId="@Model.CourseId" asp-route-videoIndex="@i">
                 <i class="fas fa-play"></i>
-                <img src="~/images/CourseVideoImg/post-1-@i" alt="" />
+                <img src="~/@Model.ImgPath" alt="" />
                 <h3>@Model.CourseName (part @i)</h3>
             </a>
         }
-
     </div>
 </section>
+
+
+   
+
 

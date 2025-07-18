@@ -1,0 +1,38 @@
+.student-form {
+  border: 1px solid #d1d1d1;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  margin-top: 30px;
+}
+
+.box {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn {
+  background-color: #5a67d8;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn:hover {
+  background-color: #4c51bf;
+}
+
+p {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+span[required] {
+  color: red;
+}

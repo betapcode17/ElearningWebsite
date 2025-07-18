@@ -1,0 +1,83 @@
+﻿@model IPagedList<ElearningWebsite.Models.Account>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using ElearningWebsite.Models
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout.cshtml";
+}
+<div class="enroll-container">
+    <h1 class="heading">Accounts Manager</h1>
+
+    <div class="enroll-body shadow-sm p-4 bg-white rounded">
+     
+
+        <div class="enroll-search d-flex justify-content-between align-items-center mb-4 flex-wrap">
+            <form asp-action="Index" method="get" class="d-flex align-items-center enroll-search-form">
+                <input type="text" name="searchValue" class="form-control enroll-input" placeholder="Search..." value="@ViewBag.SearchValue" />
+                <button type="submit" class="btn btn-primary enroll-search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+
+        <div class="enroll-table-wrapper table-responsive">
+            <table class="table table-bordered table-hover enroll-table">
+                <thead class="table-dark">
+                    <tr>
+                       
+                        <th>USERNAME</th>
+                        <th>PASSWORD</th>
+                        <th>ROLE</th>         
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                       
+                        <tr>
+                            
+                            <td>@item.Username</td>
+                            <td>@item.Password</td>
+                            <td>
+                              
+                                 @if (@item.Role == 0)
+                                {
+                                    <span class="status-in-progress">Student</span>
+                                }
+                                @if (@item.Role == 1)
+                                {
+                                    <span class="status-completed">Admin</span>
+                                }
+                            </td>
+                          
+                           
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+        <div class="enroll-pagination d-flex justify-content-center mt-4">
+            @if (Model.HasPreviousPage)
+            {
+                <a href="@Url.Action("Index", new { page = Model.PageNumber - 1, searchValue = ViewBag.SearchValue })"
+                   class="enroll-page-link">«</a>
+            }
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                <a href="@Url.Action("Index", new { page = i, searchValue = ViewBag.SearchValue })"
+                   class="enroll-page-link @(i == Model.PageNumber ? "active" : "")">@i</a>
+            }
+            @if (Model.HasNextPage)
+            {
+                <a href="@Url.Action("Index", new { page = Model.PageNumber + 1, searchValue = ViewBag.SearchValue })"
+                   class="enroll-page-link">»</a>
+            }
+        </div>
+    </div>
+</div>
+

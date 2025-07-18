@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using ElearningWebsite.ViewModel;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using ElearningWebsite.Helpers;
 
 namespace ElearningWebsite.Controllers
 {
@@ -28,17 +30,16 @@ namespace ElearningWebsite.Controllers
           
         }
 
-        // GET: Accounts
         #region Đăng nhập
         [HttpGet]
-        public IActionResult Login(string? ReturnUrl)
+        public IActionResult Login()
         {
-            ViewBag.ReturnUrl = ReturnUrl;
+            
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginVM model, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginVM model)
         {
             if (!ModelState.IsValid)
             {
@@ -51,12 +52,11 @@ namespace ElearningWebsite.Controllers
                     .AsNoTracking()
                     .FirstOrDefaultAsync(a => a.Username == model.Username);
 
-                if (account == null || account.Password != model.Password)
+                if (account == null || account.Password != PasswordUtil.HashPassword(model.Password))
                 {
                     ModelState.AddModelError(string.Empty, "Tài khoản hoặc mật khẩu không đúng");
                     return View(model);
                 }
-
                 var claims = new List<Claim>
         {
             new Claim(ClaimTypes.NameIdentifier, account.UserId.ToString()),
@@ -64,7 +64,7 @@ namespace ElearningWebsite.Controllers
             new Claim(ClaimTypes.Role, account.Role.ToString())
         };
 
-                if (account.Role == 0) // Student
+                if (account.Role == 0) 
                 {
                     var student = await _db.Students
                         .AsNoTracking()
@@ -86,7 +86,8 @@ namespace ElearningWebsite.Controllers
                         }
                     }
                 }
-                else if (account.Role == 1) // Admin
+
+                else if (account.Role == 1) 
                 {
                     var admin = await _db.Admins
                         .AsNoTracking()
@@ -96,7 +97,12 @@ namespace ElearningWebsite.Controllers
                     {
                         claims.Add(new Claim("FullName", admin.FullName));
                         claims.Add(new Claim("Email", admin.Email));
-                        claims.Add(new Claim("ImagePath", admin.ImagePath));
+
+                        if (!string.IsNullOrEmpty(admin.ImagePath))
+                        {
+                            claims.Add(new Claim("ImagePath", admin.ImagePath));
+                        }
+                        
                     }
                 }
 
@@ -109,17 +115,14 @@ namespace ElearningWebsite.Controllers
                     new AuthenticationProperties
                     {
                         IsPersistent = true,
-                        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)
+                        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(15)
                     });
 
-                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                {
-                    return Redirect(returnUrl);
-                }
+
 
                 return account.Role == 0
                     ? RedirectToAction("Index", "Home")
-                    : RedirectToAction("Index", "HomeAdmin", new { area = "Admin" });
+                    : RedirectToAction("Statistical", "Statistical", new { area = "Admin" });
             }
             catch (Exception ex)
             {
@@ -134,6 +137,29 @@ namespace ElearningWebsite.Controllers
         [Authorize]
         public IActionResult Profile()
         {
+            var studentId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(studentId))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            int enrollmentCount = _db.Enrollments
+                                     .Where(e => e.Progress == 0 || e.Progress == null)
+                                     .Count(e => e.StudentId == studentId); 
+                                 
+            ViewBag.EnrollmentCount = enrollmentCount;
+
+            int CompletedCourse = _db.Enrollments
+                                     .Where(e=>e.Progress == 100)
+                                     .Count(e => e.StudentId == studentId);
+            ViewBag.CompletedCourse = CompletedCourse;
+
+
+            int InProgessCourse = _db.Enrollments
+                                      .Where (e=>e.Progress <100 && e.Progress >0)
+                                      .Count(e=>e.StudentId == studentId);
+            ViewBag.InProgessCourse = InProgessCourse;
+
             return View();
         }
         #endregion
@@ -145,72 +171,89 @@ namespace ElearningWebsite.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Register(RegisterVM model, IFormFile ProfileImg)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterVM model, IFormFile? imageFile)
         {
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors);
                 foreach (var error in errors)
                 {
-                    Console.WriteLine(error.ErrorMessage); // Hoặc ghi log
+                    Console.WriteLine(error.ErrorMessage);
                 }
                 return View(model);
             }
-            else
+
+            if (_db.Accounts.Any(u => u.Username == model.Username))
             {
-                if (_db.Accounts.Any(u => u.Username == model.Username))
+                ModelState.AddModelError("UserName", "Tên đăng nhập đã tồn tại");
+                return View(model);
+            }
+
+            try
+            {
+
+                var lastAccount = _db.Accounts
+                                 .OrderByDescending(a => a.UserId)
+                                  .FirstOrDefault();
+                int newIdNumber = 1;
+                if (lastAccount != null && lastAccount.UserId.Length > 1)
                 {
-                    ModelState.AddModelError("UserName", "Tên Đăng nhập đã tồn tại");
-                    return View(model);
+                    string numberPart = lastAccount.UserId.Substring(1);
+                    if (int.TryParse(numberPart, out int lastNumber))
+                    {
+                        newIdNumber = lastNumber + 1;
+                    }
                 }
-                try
+                string UserId = $"U{newIdNumber:D3}";
+                model.UserId = string.IsNullOrEmpty(UserId)
+                    ? "U001"
+                    : UserId;
+
+                model.Role = 0;
+
+                var account = new Account
                 {
-                    var maxUserId = _db.Accounts
-                      .OrderByDescending(a => a.UserId)
-                      .Select(a => a.UserId)
-                      .FirstOrDefault();
+                    UserId = model.UserId,
+                    Username = model.Username,
+                    Password = PasswordUtil.HashPassword(model.Password),
+                    Role = 0,
+                };
 
-                    model.UserId = string.IsNullOrEmpty(maxUserId)
-                        ? "U001"
-                        : $"U{(int.Parse(maxUserId.Substring(1)) + 1).ToString("D3")}";
-                    model.Role = 0;
-                    var account = new Account
-                    {
-                        UserId =model.UserId, 
-                        Username = model.Username,
-                        Password = model.Password, 
-                        Role = 0,                        
-                    };
+                var student = new Student
+                {
+                    StudentId = account.UserId,
+                    FullName = model.FullName,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber ?? string.Empty,
+                    DateOfBirth = model.DateOfBirth,
+                    Gender = model.Gender,
+                };
 
-                    var student = new Student
+                if (imageFile != null && imageFile.Length > 0)
+                {
+                    string imgPath = await MyUtil.UploadImg(imageFile, "StudentImg");
+                    if (!string.IsNullOrEmpty(imgPath))
                     {
-                        StudentId = account.UserId, 
-                        FullName = model.FullName,
-                        Email = model.Email,
-                        PhoneNumber = model.PhoneNumber,
-                        DateOfBirth = model.DateOfBirth,
-                        Gender = model.Gender,                         
-                    };
-                    if (ProfileImg != null)
-                    {
-                       string imgPath =  MyUtil.UploadImg(ProfileImg, "StudentImg");
                         student.ImagePath = imgPath;
                     }
-
-                   
-                  
-                    _db.Add(account);
-                    _db.Add(student);
-                    _db.SaveChanges();
-
-                    return RedirectToAction("Index","Home");
+                    else
+                    {
+                        ModelState.AddModelError("ImagePath", "Không thể tải lên hình ảnh.");
+                        return View(model);
+                    }
                 }
-                catch (Exception ex)
-                {                
-                    _logger.LogError(ex, "Lỗi đăng nhập");
-                    ModelState.AddModelError(string.Empty, "Đã xảy ra lỗi khi đăng nhập");
-                    return View(model);
-                }
+
+                _db.Accounts.Add(account);
+                _db.Students.Add(student);
+                await _db.SaveChangesAsync();
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi đăng ký: {Message} | StackTrace: {StackTrace}", ex.Message, ex.StackTrace);
+                ModelState.AddModelError(string.Empty, "Đã xảy ra lỗi khi đăng ký: " + ex.Message);
+                return View(model);
             }
         }
         #endregion
@@ -220,8 +263,192 @@ namespace ElearningWebsite.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
-            return RedirectToAction("Index", "Home"); // Chuyển hướng về trang chủ
+            return RedirectToAction("Index", "Home");
+        }
+        #endregion
+        #region Quên mật khẩu
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ForgotPassword(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                TempData["Error"] = "Vui lòng nhập email.";
+                return RedirectToAction("ForgotPassword");
+            }
+            var student = _db.Students.FirstOrDefault(s => s.Email == email);
+            if (student == null)
+            {
+                TempData["Error"] = "Email không tồn tại trong hệ thống.";
+                return RedirectToAction("ForgotPassword");
+            }
+            var account = _db.Accounts.FirstOrDefault(a => a.UserId == student.StudentId);
+            if (account == null)
+            {
+                TempData["Error"] = "Không tìm thấy tài khoản tương ứng với sinh viên.";
+                return RedirectToAction("ForgotPassword");
+            }
+            string newPassword = SendEmail.GenerateRandomPassword();
+            account.Password = PasswordUtil.HashPassword(newPassword);
+            _db.Accounts.Update(account);
+            _db.SaveChanges();
+            bool emailSent = SendEmail.SendNewPasswordEmail(email, newPassword);
+            if (emailSent)
+            {
+                TempData["Success"] = "Mật khẩu mới đã được gửi tới email của bạn.";
+            }
+            else
+            {
+                TempData["Error"] = "Không thể gửi email. Vui lòng thử lại sau.";
+            }
+            return RedirectToAction("Login");
+        }
+        #endregion
+
+        #region Thay đổi thông tin
+        [HttpGet]
+        public IActionResult UpdateProfile()
+        {
+            var studentId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(studentId))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var student = _db.Students.FirstOrDefault(s => s.StudentId == studentId);
+            var account = _db.Accounts.FirstOrDefault(a => a.UserId == studentId);
+
+            if (student == null || account == null)
+            {
+                return NotFound("Không tìm thấy thông tin người dùng.");
+            }
+
+            var model = new RegisterVM
+            {
+                UserId = student.StudentId,
+                Username = account.Username,
+                FullName = student.FullName,
+                Email = student.Email,
+                PhoneNumber = student.PhoneNumber,
+                DateOfBirth = student.DateOfBirth,
+                Gender = student.Gender,
+                ImagePath = student.ImagePath
+            };
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfile(RegisterVM model, IFormFile? imageFile)
+        {
+            if (string.IsNullOrEmpty(model.Password))
+                ModelState.Remove("Password");
+
+            if (string.IsNullOrEmpty(model.ConfirmPassword))
+                ModelState.Remove("ConfirmPassword");
+
+            if (string.IsNullOrEmpty(model.Username))
+                ModelState.Remove("Username");
+
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                foreach (var error in errors)
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
+                return View(model);
+            }
+
+            try
+            {
+                var student = _db.Students.FirstOrDefault(s => s.StudentId == model.UserId);
+                var account = _db.Accounts.FirstOrDefault(a => a.UserId == model.UserId);
+
+                if (student == null || account == null)
+                {
+                    ModelState.AddModelError("", "Không tìm thấy người dùng.");
+                    return View(model);
+                }
+
+                if (!string.IsNullOrEmpty(model.Username) && _db.Accounts.Any(a => a.Username == model.Username && a.UserId != model.UserId))
+                {
+                    ModelState.AddModelError("Username", "Tên đăng nhập đã tồn tại.");
+                    return View(model);
+                }
+
+                if (!string.IsNullOrEmpty(model.Username))
+                {
+                    account.Username = model.Username;
+                }
+
+                if (!string.IsNullOrEmpty(model.Password))
+                {
+                    account.Password = PasswordUtil.HashPassword(model.Password);
+                }
+
+              
+                if (!string.IsNullOrEmpty(model.FullName))
+                {
+                    student.FullName = model.FullName;
+                }
+
+                if (!string.IsNullOrEmpty(model.Email))
+                {
+                    student.Email = model.Email;
+                }
+
+                if (!string.IsNullOrEmpty(model.PhoneNumber))
+                {
+                    student.PhoneNumber = model.PhoneNumber;
+                }
+
+                if (model.DateOfBirth != default(DateOnly))
+                {
+                    student.DateOfBirth = model.DateOfBirth;
+                }
+
+                if (model.Gender != default(int))
+                {
+                    student.Gender = model.Gender;
+                }
+
+               
+                if (imageFile != null && imageFile.Length > 0)
+                {
+                    string imgPath = await MyUtil.UploadImg(imageFile, "StudentImg");
+                    if (!string.IsNullOrEmpty(imgPath))
+                    {
+                        student.ImagePath = imgPath;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("ImagePath", "Không thể tải lên hình ảnh.");
+                        return View(model);
+                    }
+                }
+
+                _db.Update(account);
+                _db.Update(student);
+                await _db.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Cập nhật thông tin thành công!";
+                return RedirectToAction("Profile", "Accounts");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi cập nhật thông tin");
+                ModelState.AddModelError(string.Empty, "Đã xảy ra lỗi khi cập nhật thông tin.");
+                return View(model);
+            }
         }
         #endregion
     }
 }
+
