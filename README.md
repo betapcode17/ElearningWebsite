@@ -65,17 +65,14 @@ Students can interact with the system through a streamlined interface designed t
 ### 1. 👤 Guest Interface
 
 #### 1.1: Landing Page
-Visitors are welcomed with a homepage showcasing featured courses and an overview of the platform.
 
 <img width="1859" height="908" alt="image" src="https://github.com/user-attachments/assets/dced77a7-f824-427f-a8fb-12f44cade985" />
 
 #### 1.2: Course List
-Non-logged-in users can browse available courses including names, instructors, categories, and start dates.
 
 <img width="1870" height="863" alt="image" src="https://github.com/user-attachments/assets/6f213475-bc44-4810-b1b7-7365c42520bd" />
 
 #### 1.3: Course Details
-Each course includes detailed information like description, tuition, available slots, and schedule.
 
 <img width="1514" height="813" alt="image" src="https://github.com/user-attachments/assets/900f98d4-28ac-4fd6-b9a9-844587b2bb19" />
 
@@ -91,20 +88,21 @@ Each course includes detailed information like description, tuition, available s
 
 ### 2. 👨‍🎓 Student Interface
 
-#### 2.1: Student Dashboard
-Students see a personalized dashboard listing enrolled courses, upcoming classes, and progress summaries.
+#### 2.2: Course Complemet
 
-#### 2.2: Course Enrollment
-Students can enroll in courses with real-time slot validation and receive confirmation.
+<img width="1799" height="714" alt="image" src="https://github.com/user-attachments/assets/ce7047e1-834c-4bbc-9c74-e2d5914ac8d7" />
 
 #### 2.3: My Courses
-Displays a student's enrolled courses, including details like start date, instructor, and status.
 
-#### 2.4: Cancel Enrollment
-Students can cancel course registrations before the start date.
+<img width="1767" height="666" alt="image" src="https://github.com/user-attachments/assets/dee7b983-2246-4a4c-b169-22e23ee3091d" />
+
+#### 2.4: Ongoing Course
+
+<img width="1877" height="820" alt="image" src="https://github.com/user-attachments/assets/bb40f415-f1ee-41bb-8f67-c91d5310b11b" />
 
 #### 2.5: Update Profile
-Students can update personal info including name, email, and password.
+
+<img width="415" height="742" alt="image" src="https://github.com/user-attachments/assets/e778aa41-7cdb-477f-a9d2-f514b8b11080" />
 
 ---
 
