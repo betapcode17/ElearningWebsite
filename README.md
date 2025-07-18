@@ -106,58 +106,40 @@ Students can interact with the system through a streamlined interface designed t
 
 ---
 
-### 3. 👨‍🏫 Instructor Interface
+### 3. 🛡️ Admin Interface
 
-#### 3.1: Instructor Dashboard
-Shows a summary of owned courses, upcoming schedules, and registration stats.
+#### 3.1: Landing Page
 
-#### 3.2: Create New Course
-Instructors can add new courses by providing details such as name, description, tuition, and capacity.
+<img width="1882" height="701" alt="image" src="https://github.com/user-attachments/assets/3aefdb1e-9377-4684-a204-dbef503a666c" />
 
-#### 3.3: Edit/Delete Course
-Full control over their own courses including editing or deleting them.
+#### 3.2: Admin Dashboard
 
-#### 3.4: View Enrolled Students
-Each course page shows a list of students who have registered.
+<img width="1807" height="909" alt="image" src="https://github.com/user-attachments/assets/c9544710-d9cc-4520-867d-c8a288bf2139" />
 
-#### 3.5: Update Instructor Profile
-Instructors can edit their name, avatar, and credentials.
 
----
+#### 3.2: Manage Courses
+<img width="1875" height="850" alt="image" src="https://github.com/user-attachments/assets/221369b5-6c1c-4aa6-bda6-c6bd064c913e" />
 
-### 4. 🛡️ Admin Interface
+#### 3.2.1: Create Courses
+<img width="779" height="807" alt="image" src="https://github.com/user-attachments/assets/b87142ca-76e7-40ed-98b2-8719c07dc581" />
+#### 3.2.2: Edit Courses
+<img width="764" height="850" alt="image" src="https://github.com/user-attachments/assets/7b6d3d15-bba1-4523-b3fb-ff43fadd2a3e" />
+#### 3.2.3: Delete Courses
+<img width="1794" height="876" alt="image" src="https://github.com/user-attachments/assets/64bf6a4f-0b06-40a6-860b-fc7ec688d84a" />
 
-#### 4.1: Admin Dashboard
-A centralized panel displaying platform-wide metrics such as:
-- Total number of students/instructors
-- Course counts
-- Popular courses
+#### 3.3: Manage Accounts
 
-#### 4.2: Manage Courses
-Full CRUD access to all courses on the platform. Admins can edit or delete any course.
-
-#### 4.3: Manage Users
-Admins can manage both students and instructors:
-- View user lists
-- Activate/deactivate accounts
-- Reset passwords
+<img width="1865" height="822" alt="image" src="https://github.com/user-attachments/assets/30641102-35fb-4922-8e8d-482385ab84a7" />
 
 #### 4.4: Manage Enrollments
-Admins can see all course enrollments and manually unregister users if needed.
 
-#### 4.5: Manage Categories
-Create or update course categories for better organization.
+<img width="1891" height="755" alt="image" src="https://github.com/user-attachments/assets/1b3df70b-93ee-4e00-9b65-f56ba576961b" />
 
-#### 4.6: View Platform Logs (Optional)
-Admins can audit changes made across the system for security and transparency.
 
-#### 4.7: Admin Profile
-Admins can edit their own profile and change credentials.
+#### 4.5: Manage Students
+
+<img width="1892" height="751" alt="image" src="https://github.com/user-attachments/assets/dd995764-85d2-46aa-9704-a9d81ff5e672" />
 
 ---
-
-### 📸 Screenshot Examples
-
-> *(Add screenshots here using Markdown `![Alt text](image-url)` if hosted on GitHub or externally)*
 
 
